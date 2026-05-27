@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.tsbuildinfo
+
+# tsc -b (composite) emits JS/d.ts next to config files — never commit these
+vite.config.js
+vite.config.d.ts

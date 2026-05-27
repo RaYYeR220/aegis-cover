@@ -1,0 +1,253 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0c0d0f;
+  --bg2: #111316;
+  --bg3: #161820;
+  --line: rgba(255,255,255,0.07);
+  --line2: rgba(255,255,255,0.12);
+  --dot: rgba(255,255,255,0.11);
+  --text: #e8e9ea;
+  --text2: #8a8d93;
+  --text3: #555860;
+  --accent: #7ecfcf;
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'IBM Plex Sans', sans-serif;
+  --dot-size: 1px;
+  --dot-gap: 24px;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.5;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image: radial-gradient(circle, var(--dot) var(--dot-size), transparent var(--dot-size));
+  background-size: var(--dot-gap) var(--dot-gap);
+  pointer-events: none;
+}
+
+#app {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column;
+  /* Uniform ~12% zoom for legibility (esp. on QHD / in video capture). Pre-divide the viewport
+     box so the zoomed shell still fills exactly one screen and the fixed layout is preserved. */
+  zoom: 1.12;
+  width: calc(100vw / 1.12);
+  height: calc(100vh / 1.12);
+}
+
+/* ─── NAV ─── */
+nav {
+  display: flex; align-items: center;
+  height: 48px;
+  border-bottom: 1px solid var(--line);
+  padding: 0 32px;
+  flex-shrink: 0;
+  background: rgba(12,13,15,0.92);
+  backdrop-filter: blur(8px);
+  gap: 0;
+}
+
+.nav-brand {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--text);
+  text-transform: uppercase;
+  margin-right: 32px;
+  display: flex; align-items: center; gap: 8px;
+  flex-shrink: 0;
+}
+.nav-brand-mark {
+  width: 17px; height: 17px;
+  display: inline-block;
+  color: var(--text);
+}
+.nav-brand-core {
+  fill: var(--accent);
+  animation: pulse-live 2.4s ease-in-out infinite;
+}
+@keyframes pulse-live {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.nav-sep {
+  width: 1px; height: 16px;
+  background: var(--line2);
+  margin-right: 32px;
+  flex-shrink: 0;
+}
+
+.nav-links { display: flex; gap: 0; flex: 1; }
+.nav-link {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding: 0 20px;
+  height: 48px;
+  display: flex; align-items: center;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+  user-select: none;
+}
+.nav-link:hover { color: var(--text2); }
+.nav-link.active {
+  color: var(--text);
+  border-bottom-color: var(--text2);
+}
+
+.nav-right {
+  margin-left: auto;
+  display: flex; align-items: center; gap: 16px;
+  flex-shrink: 0;
+}
+.nav-chain {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--text3);
+  display: flex; align-items: center; gap: 6px;
+}
+.nav-chain-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  animation: pulse-live 2.4s ease-in-out infinite;
+}
+.wallet-btn {
+  padding: 5px 14px;
+  background: transparent;
+  border: 1px solid var(--line2);
+  color: var(--text2);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.wallet-btn:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: var(--text3);
+  color: var(--text);
+}
+.wallet-btn.connected {
+  color: var(--text);
+  border-color: var(--line2);
+}
+.wallet-bal {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--text3);
+  letter-spacing: 0.05em;
+}
+
+/* ─── PAGES ─── */
+/* NOTE (React port): React Router mounts ONE page at a time, so a page root must
+   carry BOTH classes — className="page active" — to be visible (.page is display:none). */
+.page {
+  flex: 1; overflow: hidden;
+  display: none;
+  position: relative;
+}
+.page.active { display: flex; }
+
+/* ═══════════════════════════════════════════════════
+   DASHBOARD PAGE
+═══════════════════════════════════════════════════ */
+#page-dashboard {
+  flex-direction: column;
+  overflow: hidden;
+}
+.dash-layout {
+  display: flex; flex-direction: column;
+  height: 100%; width: 100%;
+  overflow: hidden;
+}
+
+/* Summary tiles */
+.dash-tiles {
+  display: flex;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.dash-tile {
+  flex: 1;
+  padding: 16px 24px;
+  border-right: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 4px;
+}
+.dash-tile:last-child { border-right: none; }
+.tile-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text3);
+}
+.tile-value {
+  font-family: var(--mono);
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.tile-sub {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--text3);
+}
+.tile-value.claimable {
+  font-size: 18px;
+  color: var(--text);
+}
+
+/* Single scroll region holding the registry + peril catalog */
+.dash-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+.dash-scroll::-webkit-scrollbar { width: 4px; }
+.dash-scroll::-webkit-scrollbar-track { background: transparent; }
+.dash-scroll::-webkit-scrollbar-thumb { background: var(--line2); }
+
+.dash-section-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text2);
+  margin-bottom: 6px;
+}
+.dash-section-note {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--text3);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.dash-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}

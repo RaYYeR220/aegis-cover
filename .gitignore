@@ -1,0 +1,31 @@
+# Node / TS
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Foundry
+out/
+cache/
+broadcast/
+!broadcast/**/run-latest.json
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local tooling & scratch
+.remember/
+.claude/
+.playwright-mcp/
+*.out
+web/mockup/
+web/variants/
