@@ -7,6 +7,8 @@
 **A two-sided DeFi insurance marketplace on Somnia, where an on-chain AI validator consensus
 adjudicates claims and prices risk — no human in the loop.** Built for the Encode × Somnia Agentathon.
 
+**▶ Live demo:** https://aegis-alpha-nine.vercel.app — reads Somnia Shannon live, no wallet needed to look around.
+
 A watcher detects a covered protocol getting drained (or a stablecoin breaking its peg), and
 **autonomously** asks Somnia's native AI agents for a verdict. Five validators (Qwen3-30B) each
 score the evidence 0–100; the oracle takes the **median**; if it clears the threshold the cover
@@ -80,10 +82,11 @@ fresh per demo via `contracts/rearm.sh`.
 No wallet or install is needed to *see it live*; a Shannon wallet to *interact*; the full autonomous
 claim cycle is in the demo video (and reproducible end-to-end locally).
 
-**1 — See it live (read-only, ~1 min).** `cd web/app && npm install && npm run dev`, then open the
-printed localhost URL. The frontend reads Somnia Shannon directly, so the **Dashboard** shows the real
-on-chain board (7 covered protocols) — each with its live value, AI risk score, and AI-priced premium —
-and **Claims** shows the validator pentagon with the median-vs-threshold consensus view.
+**1 — See it live (read-only, no install).** Open **https://aegis-alpha-nine.vercel.app** (or run it
+locally: `cd web/app && npm install && npm run dev`). The frontend reads Somnia Shannon directly, so the
+**Dashboard** shows the real on-chain board (7 covered protocols) — each with its live value, AI risk
+score, and AI-priced premium — and **Claims** shows the validator pentagon with the median-vs-threshold
+consensus view.
 
 **2 — Interact (needs test STT).** Add Somnia Shannon to MetaMask (chain `50312`, RPC
 `https://api.infra.testnet.somnia.network`, explorer `https://shannon-explorer.somnia.network`) and
