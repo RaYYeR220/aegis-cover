@@ -8,6 +8,7 @@
 adjudicates claims and prices risk — no human in the loop.** Built for the Encode × Somnia Agentathon.
 
 **▶ Live demo:** https://aegis-alpha-nine.vercel.app — reads Somnia Shannon live, no wallet needed to look around.
+**▶ Demo video:** https://youtu.be/0IZKuDRkmLE
 
 A watcher detects a covered protocol getting drained (or a stablecoin breaking its peg), and
 **autonomously** asks Somnia's native AI agents for a verdict. Five validators (Qwen3-30B) each
