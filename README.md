@@ -2,6 +2,10 @@
   <img src="web/app/public/favicon.svg" width="84" alt="Aegis" />
 </p>
 
+<p align="center">
+  <strong>🏆 Winner — Encode × Somnia Agentathon 2026 · Top 10 of 194 submitted projects</strong>
+</p>
+
 # Aegis — autonomous AI-consensus parametric cover
 
 **A two-sided DeFi insurance marketplace on Somnia, where an on-chain AI validator consensus
